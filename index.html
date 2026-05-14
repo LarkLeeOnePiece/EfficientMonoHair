@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EfficientMonoHair: Fast Strand-Level Reconstruction from Monocular Video</title>
+  <meta name="description" content="EfficientMonoHair achieves fast and accurate strand-level hair reconstruction from monocular video via multi-view direction fusion. CVPR 2026.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="static/css/style.css">
+</head>
+<body>
+
+<!-- Hero -->
+<header class="hero">
+  <div class="container">
+    <span class="conference-badge">CVPR 2026</span>
+    <h1>EfficientMonoHair: Fast Strand-Level Reconstruction<br>from Monocular Video via Multi-View Direction Fusion</h1>
+    <p class="authors">
+      <a href="#">Da Li</a>,
+      <a href="#">Dominik Engel</a>,
+      <a href="#">Deng Luo</a>,
+      <a href="#">Ivan Viola</a>
+    </p>
+    <p class="affiliation">King Abdullah University of Science and Technology (KAUST)</p>
+    <div class="btn-row">
+      <a class="btn" href="#">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zM6 20V4h7v5h5v11H6z"/></svg>
+        Paper
+      </a>
+      <a class="btn" href="#">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zM6 20V4h7v5h5v11H6z"/></svg>
+        arXiv
+      </a>
+      <a class="btn" href="https://github.com/LarkLeeOnePiece/EfficientMonoHair">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+        Code
+      </a>
+      <a class="btn" href="#">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+        Video
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- Teaser -->
+<section class="teaser-section">
+  <div class="container">
+    <img src="static/images/teaser.png" alt="EfficientMonoHair teaser: strand-level hair reconstruction from monocular video">
+    <p class="teaser-caption">
+      Our method efficiently reconstructs strand-level hair geometry from monocular video input.
+      <strong>Top:</strong> EfficientMonoHair accurately captures diverse hairstyles, including curly hair, faithfully preserving both the global silhouette and fine local curls.
+      <strong>Bottom:</strong> The scalp-attached strand reconstruction can be seamlessly imported into existing graphics systems for photorealistic rendering and physically based hair simulation.
+    </p>
+  </div>
+</section>
+
+<!-- Abstract -->
+<section>
+  <div class="container">
+    <h2>Abstract</h2>
+    <div class="section-divider"></div>
+    <p class="abstract-text">
+      Strand-level hair geometry reconstruction is a fundamental problem in virtual human modeling and the digitization of hairstyles. However, existing methods still suffer from a significant trade-off between accuracy and efficiency. Implicit neural representations can capture the global hair shape but often fail to preserve fine-grained strand details, while explicit optimization-based approaches achieve high-fidelity reconstructions at the cost of heavy computation and poor scalability.
+      To address this issue, we propose <strong>EfficientMonoHair</strong>, a fast and accurate framework that combines the implicit neural network with multi-view geometric fusion for strand-level reconstruction from monocular video. Our method introduces a <strong>Fusion-Patch-based Multi-View Optimization (FPMVO)</strong> that reduces the number of optimization iterations for point cloud direction, as well as a novel <strong>Parallel Hair Growing (PHG)</strong> strategy that relaxes voxel occupancy constraints, allowing large-scale strand tracing to remain stable and robust even under inaccurate or noisy orientation fields.
+      Extensive experiments on representative real-world hairstyles demonstrate that our method can robustly reconstruct high-fidelity strand geometries with accuracy. On synthetic benchmarks, our method achieves reconstruction quality comparable to state-of-the-art methods, while improving runtime efficiency by nearly an order of magnitude.
+    </p>
+  </div>
+</section>
+
+<!-- Key Highlights -->
+<section>
+  <div class="container">
+    <h2>Key Highlights</h2>
+    <div class="section-divider"></div>
+    <div class="highlights">
+      <div class="highlight-card">
+        <div class="highlight-number">~7x</div>
+        <div class="highlight-label">Overall Speed-up<br>over State-of-the-Art</div>
+      </div>
+      <div class="highlight-card">
+        <div class="highlight-number">28x</div>
+        <div class="highlight-label">Faster Outer Direction<br>Optimization (FPMVO)</div>
+      </div>
+      <div class="highlight-card">
+        <div class="highlight-number">~23 min</div>
+        <div class="highlight-label">Total Reconstruction<br>(vs. 136 min MonoHair)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Method / Pipeline -->
+<section class="pipeline-section">
+  <div class="container">
+    <h2>Method Overview</h2>
+    <div class="section-divider"></div>
+    <img src="static/images/pipeline.jpg" alt="EfficientMonoHair pipeline overview">
+    <p class="pipeline-caption">
+      Our framework reconstructs strand-level hair geometry from a monocular video in three stages:
+      <strong>(a) Outer Direction Optimization</strong> &mdash; coarse hair geometry is reconstructed via Instant-NGP, followed by our FPMVO to obtain a stable outer point cloud with directions.
+      <strong>(b) Inner Direction Inference</strong> &mdash; a View-Aware Transformer infers invisible inner orientations from unidirectional strand maps.
+      <strong>(c) Hair Growing</strong> &mdash; both inner and outer direction fields are fused into an Occupancy/Orientation Volume, from which our Parallel Hair Growing (PHG) generates the final high-fidelity 3D hair model.
+    </p>
+  </div>
+</section>
+
+<!-- Results -->
+<section>
+  <div class="container">
+    <h2>Results</h2>
+    <div class="section-divider"></div>
+    <div class="results-grid">
+
+      <div class="result-block">
+        <h3>Curly Hair Reconstruction</h3>
+        <img src="static/images/white_curly.png" alt="Curly hair reconstruction comparison">
+        <p class="result-caption">
+          Visual comparison of curly hair reconstruction across methods. Our approach effectively reconstructs intricate strand flow and layered structure with clear spatial hierarchy, outperforming DiffLocks and GaussianHaircut on complex curly hairstyles.
+        </p>
+      </div>
+
+      <div class="result-block">
+        <h3>Diverse Hairstyles</h3>
+        <img src="static/images/four_hairs.png" alt="Diverse hairstyle reconstructions">
+        <p class="result-caption">
+          Visual comparison on big wavy, asymmetric, short, and medium curly hairstyles. Our method demonstrates consistent high-quality reconstruction across various hair types.
+        </p>
+      </div>
+
+      <div class="result-block">
+        <h3>Ablation: FPMVO &amp; PHG</h3>
+        <img src="static/images/ab_PMVO_PHG.png" alt="Ablation study on FPMVO and PHG">
+        <p class="result-caption">
+          Ablation study showing the contribution of FPMVO and PHG. Our Parallel Hair Growing strategy substantially enhances the robustness of the system to direction-field noise.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Quantitative Results -->
+<section style="background: var(--bg-alt);">
+  <div class="container">
+    <h2>Quantitative Results on Hair20K</h2>
+    <div class="section-divider"></div>
+    <div class="table-wrapper">
+      <table class="results-table">
+        <thead>
+          <tr>
+            <th rowspan="3">Method</th>
+            <th rowspan="3">Speed</th>
+            <th rowspan="3">Time</th>
+            <th colspan="3">Occupancy F1</th>
+            <th colspan="3">Orientation F1</th>
+          </tr>
+          <tr>
+            <th>2mm</th><th>3mm</th><th>4mm</th>
+            <th>2mm/20&deg;</th><th>3mm/30&deg;</th><th>4mm/40&deg;</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>MonoHair (P=5)</td>
+            <td>1x</td>
+            <td>136m</td>
+            <td>50.6</td><td>56.3</td><td>60.6</td>
+            <td>19.9</td><td>27.3</td><td>34.7</td>
+          </tr>
+          <tr>
+            <td>MonoHair (P=1)</td>
+            <td>1.2x</td>
+            <td>111m</td>
+            <td>44.8</td><td>50.4</td><td>54.7</td>
+            <td>15.3</td><td>22.2</td><td>28.7</td>
+          </tr>
+          <tr class="ours-row">
+            <td>Ours (full)</td>
+            <td class="best">5.9x</td>
+            <td class="best">23m</td>
+            <td>52.2</td><td>58.4</td><td>62.9</td>
+            <td>15.5</td><td>21.7</td><td>30.3</td>
+          </tr>
+          <tr class="ours-row">
+            <td>Ours (PHG only)</td>
+            <td>1.9x</td>
+            <td>72m</td>
+            <td class="best">55.6</td><td class="best">61.2</td><td class="best">65.4</td>
+            <td class="best">20.5</td><td class="best">28.2</td><td class="best">36.5</td>
+          </tr>
+          <tr>
+            <td style="color:#999">DiffLocks</td>
+            <td style="color:#999">818x</td>
+            <td style="color:#999">10s</td>
+            <td style="color:#999">35.2</td><td style="color:#999">39.6</td><td style="color:#999">43.2</td>
+            <td style="color:#999">10.0</td><td style="color:#999">17.6</td><td style="color:#999">24.0</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="result-caption" style="margin-top:16px; text-align:center;">
+      Our method is competitive with MonoHair (P=5) while being <strong>6x faster</strong>. Using only PHG achieves the <strong>best accuracy</strong> overall with a 2x speed-up.
+    </p>
+  </div>
+</section>
+
+<!-- BibTeX -->
+<section class="bibtex-section">
+  <div class="container">
+    <h2>BibTeX</h2>
+    <div class="section-divider"></div>
+    <div class="bibtex-block">
+      <button class="copy-btn" onclick="copyBibtex()">Copy</button>
+<pre>@inproceedings{li2026efficientmonohair,
+  title     = {EfficientMonoHair: Fast Strand-Level Reconstruction
+               from Monocular Video via Multi-View Direction Fusion},
+  author    = {Li, Da and Engel, Dominik and Luo, Deng and Viola, Ivan},
+  booktitle = {IEEE/CVF Conference on Computer Vision
+               and Pattern Recognition (CVPR)},
+  year      = {2026}
+}</pre>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <p>
+      &copy; 2026 Da Li, Dominik Engel, Deng Luo, Ivan Viola &mdash;
+      <a href="https://www.kaust.edu.sa">KAUST</a>
+    </p>
+    <p style="margin-top:6px; font-size:0.85em;">
+      Website template inspired by <a href="https://nerfies.github.io">Nerfies</a>.
+    </p>
+  </div>
+</footer>
+
+<script>
+function copyBibtex() {
+  const text = document.querySelector('.bibtex-block pre').textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.querySelector('.copy-btn');
+    btn.textContent = 'Copied!';
+    setTimeout(() => btn.textContent = 'Copy', 2000);
+  });
+}
+</script>
+
+</body>
+</html>
